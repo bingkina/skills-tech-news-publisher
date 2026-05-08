@@ -115,6 +115,7 @@ Use this exact Markdown template. The `# 标题` line is the article title — i
 # 标题：动词+核心事实，拒绝标题党
 
 > 一句话且不含糊的总结，点明该事件对行业或技术的具体影响。
+![配图说明](https://r2-uploaded-image-url)
 
 ## 技术/事件点 A
 具体细节描述（包含数据/版本号）。
@@ -126,6 +127,44 @@ Use this exact Markdown template. The `# 标题` line is the article title — i
 - [来源1名称](URL)
 - [来源2名称](URL)
 ```
+
+### 配图：在摘要 blockquote 之后插入一张图
+
+每篇文章在 `> 一句话总结` 之后必须配一张图。流程：
+
+1. **选图** — 两种来源都可以，按情境选：
+   - **信源图**：信息源文章里的官方配图（产品截图、官方海报、benchmark 图表、论文 figure 等）。优先用这种，因为信息密度高。
+   - **页面截图**：当信源没有合适的图时，对官方发布页 / 推特原帖 / GitHub release 页面截图。截图要保留可读的关键信息（标题、数据、时间戳），不要截一片白底。
+   - 不要用与正文无关的"配图美化"（generic stock photo、随便一张 AI 生成图）—— 信噪比第一，图也算信息。
+
+2. **下载到本地** — 把选定的图保存到本地文件系统（任意路径都行，例如 `/tmp/cover.png`）。如果是网络图片，用 `curl` / `wget` 下载；如果是截图，用截图工具保存到本地。
+
+3. **上传前确认** — 在跑 `image` 命令之前，**必须先和用户确认**。把以下信息告诉用户并等待明确同意（"是 / yes / 上传 / 确认" 等肯定回复）：
+   - 选图来源（信源图 / 截图）
+   - 本地路径
+   - 一两句话说明这张图的内容（让用户判断合不合适）
+
+   用户没明确同意之前不要跑 `image` 命令。如果用户说要换图，回到第 1 步重新选。
+
+4. **上传到 Cloudflare R2** — 用户确认后，运行 `image` 命令把本地图片上传到 Cloudflare R2，命令会把 markdown 格式的图片链接（`![](url)`）自动复制到剪贴板。
+
+   直接运行：
+   ```bash
+   image <图片本地路径>
+   ```
+
+   例如：
+   ```bash
+   image /tmp/cover.png
+   ```
+
+   命令成功后，stdout 通常会回显上传后的 URL 或 markdown 片段。**抓取这个输出**，从中解析出 `![](https://...)` 形式的 markdown 链接（或拼接出来）—— 这就是要插入文章的内容。
+
+   注：在自动化环境里没有"剪贴板粘贴"这一步，所以**直接读 `image` 命令的 stdout** 来拿到 URL，不要依赖 clipboard。
+
+5. **插入到草稿** — 把上一步拿到的 markdown 图片链接放在 blockquote 摘要之后、第一个 `## 技术/事件点` 之前，**与 blockquote 之间只隔 1 个换行（不要空行）**。alt text 用一句简短中文描述（例如 `Claude 4.7 发布页截图`、`MMLU benchmark 对比图`），便于 SEO 和无障碍。
+
+6. **失败兜底** — 如果 `image` 命令不存在（找不到该 CLI）或上传失败（网络错误、R2 返回非 2xx），不要默默跳过——在最终汇报里明确告诉用户"配图上传失败，请手动补图"，并把本地图片路径留给用户。绝对不要伪造一个 R2 URL。
 
 Title rules:
 - Verb + core fact. No clickbait, no "震惊体", no question marks unless the question is genuinely the news.
@@ -143,7 +182,7 @@ Once the article is drafted:
 5. Append the article body to the file, with these transformations:
    - **Strip the `# 标题：...` line** (title is in frontmatter, no need to repeat).
    - **Strip the `## 来源引用 (Sources)` section entirely** — including the heading and all bullets.
-   - Keep the blockquote summary, all `## 技术/事件点 X` sections, and their content.
+   - Keep the blockquote summary, the `![配图](...)` image line, all `## 技术/事件点 X` sections, and their content.
 6. Verify the file looks right (frontmatter intact, body clean, no duplicate title, no Sources section).
 
 ## Stage 4 — SEO optimization
