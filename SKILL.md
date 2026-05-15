@@ -212,7 +212,7 @@ The current top-level categories are: **多模态**、**大模型**、**行业�
    - English only, lowercase, words separated by `-`.
    - Short and punchy. Drop stop words (a, the, of, for, etc.).
    - Must contain the core search-intent keyword.
-   - Example: title "Anthropic 发布 Claude 4.7，定价不变" → permalink: `anthropic-claude-4-7-release`
+   - Example: title "Anthropic 发布 Claude 4.7，定价不变" → permalink: `posts/2026/05/anthropic-claude-4-7-release/`
 
 2. **Categories**
    - Pick 1–2 from the existing four unless absolutely none fit.
@@ -237,7 +237,7 @@ Example final frontmatter:
 ---
 title: Anthropic 发布 Claude 4.7，定价不变
 date: 2026-05-07 14:30:00
-permalink: anthropic-claude-4-7-release
+permalink: posts/YYYY/MM/anthropic-claude-4-7-release/
 categories:
   - 大模型
 tags:
