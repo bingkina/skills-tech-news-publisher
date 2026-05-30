@@ -1,6 +1,6 @@
 ---
 name: tech-news-publisher
-description: Research a tech news topic and save it as a Hexo draft on the user's blog (51AllAI) for the user to review and publish manually. Use this skill whenever the user provides a tech news headline, topic, or product/event name and asks to "write an article", "draft a post", "research and write about", or anything that implies producing a tech intelligence brief — even if they don't explicitly say "Hexo" or "blog". Trigger if the user is in a Hexo project directory and asks for a tech article. The skill researches the topic across multiple sources, writes a high-signal Chinese tech intelligence brief in the "科技情报分析师" voice, creates a Hexo draft via `hexo new draft`, and optimizes SEO frontmatter (permalink/categories/tags/description). The article is left in `source/_drafts/` — the skill does NOT run `hexo publish`; the user will publish manually after reviewing.
+description: Research a tech news headline, product, paper, funding event, or industry topic and save a high-signal Chinese Hexo draft for 51AllAI. Use when the user asks to write, draft, research, or turn a tech topic into a blog post, especially inside a Hexo project. The skill stops at `source/_drafts/` with SEO frontmatter and does not publish.
 ---
 
 # Tech News Publisher (科技情报简讯发布器)
@@ -13,9 +13,9 @@ description: Research a tech news topic and save it as a Hexo draft on the user'
 
 本 skill 已针对 Anthropic API 的 prompt caching 优化。**对 SKILL.md 主体的任何修改都会让缓存失效**，下一次调用要重新写入缓存（贵 25%）。
 
-**安全修改区**（不影响主缓存）：
+**安全修改区**（不影响主缓存主体）：
 - `examples/` 目录下的所有文件（示例样本、模板、流程演示）
-- 在运行时通过 `grep` / `view` 动态读取的内容（如分类列表、tag 池）
+- 在运行时通过命令行检索 / 文件读取动态获取的内容（如分类列表、tag 池）
 
 **谨慎修改区**（会击穿缓存）：
 - 本文件（SKILL.md）的任何字面修改 —— 包括空格、标点
@@ -33,20 +33,20 @@ description: Research a tech news topic and save it as a Hexo draft on the user'
 - 跨会话（或会话间隔超过 5 分钟）缓存会过期，第 2 篇会被当成首次写入
 
 实操建议：
-- 连续产文时，**不要关掉对话**，把多个选题在同一会话里逐个交给 Claude
+- 连续产文时，**不要关掉对话**，把多个选题在同一会话里逐个交给当前 AI 写作代理
 - 如果今天计划产文 ≥3 篇但中间有间隔，可以考虑在 API 调用层使用 1 小时缓存（`cache_control: {"type": "ephemeral", "ttl": "1h"}`）
 
 ---
 
 ## When this skill triggers
 
-用户运营 Hexo 博客，会给一个话题（如 "Claude 4.7 发布"、"Anthropic 新一轮融资"、一篇论文标题），希望产出一篇可发布的草稿。用户自己审核并发布，**不要自动跑 `hexo publish`**。
+用户运营 Hexo 博客，会给一个话题（如 "某模型新版发布"、"某公司新一轮融资"、一篇论文标题），希望产出一篇可发布的草稿。用户自己审核并发布，**不要自动跑 `hexo publish`**。
 
 如果话题模糊到查不到任何可信信息，停下来告诉用户，不要编造。
 
 ## Prerequisites
 
-- 当前工作目录是 Hexo 项目根（验证：`_config.yml` 和 `source/_posts/` 都存在）。不是的话先让用户切目录。
+- 当前工作目录是 Hexo 项目根（验证：`_config.yml` 和 `source/_posts/` 都存在）。不是的话先切到可确认的 Hexo 项目根；找不到再问用户。
 - 环境里有 `hexo` CLI。
 - 可以联网搜索。
 
@@ -68,7 +68,7 @@ description: Research a tech news topic and save it as a Hexo draft on the user'
 
 ### Research workflow
 
-1. **多源挖掘** — 用 web_search 跨多层信源，不要只查一层：
+1. **多源挖掘** — 用当前环境可用的联网检索/浏览工具跨多层信源，不要只查一层：
    - **代码层**: GitHub (releases, commits, issues)
    - **理论层**: Arxiv, official research blogs
    - **舆论层**: Twitter/X (developer accounts, founders)
@@ -131,26 +131,26 @@ AI 写作有几个肌肉记忆，主动反着来：
 - 概括转述：把别人原话用自己话复述一遍，再补一句"也就是说...再次复述一遍" —— AI 重灾区，删掉转述层。
 - "我们可以看到"、"我们注意到"、"值得一提的是"、"有趣的是" —— 全删。直接说事。
 
-**对照参考**：如果不确定语感，读 `examples/tone-samples.md` 里的 ❌/✅ 对照样本。
+**对照参考**：如果不确定语感，读 `examples/tone-samples.md` 里的反例/正例对照样本。
 
 ---
 
 ## Stage 2 — Write the article
 
-Markdown 模板、Hexo frontmatter 示例、permalink 命名规则 —— 全部在 `examples/article-template.md`。写作前 `view` 一下这个文件。
+Markdown 模板、Hexo frontmatter 示例、permalink 命名规则 —— 全部在 `examples/article-template.md`。写作前读取这个文件。
 
 Title 关键规则（**这条必须遵守**）：
 - 动词 + 核心事实。不标题党，不用"震惊体"，不用问号（除非疑问本身就是新闻）。
 
 ### 配图
 
-每篇在 blockquote 摘要之后必须配一张图。**详细流程在 `examples/image-workflow.md`**，包括选图原则、下载、用户确认话术、`image` CLI 调用、失败兜底。
+每篇在 blockquote 摘要之后必须配一张图。**详细流程在 `examples/image-workflow.md`**，包括选图原则、下载、用户确认话术、上传方式、失败兜底。
 
-写作阶段执行配图时 `view` 这个文件。
+写作阶段执行配图时读取这个文件。
 
 **配图的硬性规则**（在主文件里强调，不放到 examples）：
-- **跑 `image` 命令前必须先和用户确认**，等到"是/yes/上传/确认"等明确肯定回复才上传
-- **`image` 命令失败不要默默跳过**，明确告知用户"配图上传失败，请手动补图"
+- **跑任何图片上传命令前必须先和用户确认**，等到"是/yes/上传/确认"等明确肯定回复才上传
+- **图片上传失败不要默默跳过**，明确告知用户"配图上传失败，请手动补图"
 - **绝对不要伪造 R2 URL**
 
 ---
@@ -187,7 +187,7 @@ grep -h "^categories:" source/_posts/*.md 2>/dev/null | sort -u
 grep -rh "^tags:" source/_posts/*.md 2>/dev/null | sort -u
 ```
 
-如果 grep 漏掉了多行 YAML 列表，再直接 `view` 几个近期文章文件兜底。
+如果 grep 漏掉了多行 YAML 列表，再直接读取几个近期文章文件兜底。
 
 把 grep 的结果作为本次分类/标签决策的**唯一权威源**。如果文章实在不匹配任何现有 top-level 分类，**先和用户确认再新增**。
 
@@ -224,7 +224,7 @@ grep -rh "^tags:" source/_posts/*.md 2>/dev/null | sort -u
 
 ## Stage 5 — Hand off to user (do NOT publish)
 
-**停在这里。** 不要跑 `hexo publish`。用户会自己审核后发布。
+**停在这里。** 不要跑 `hexo publish`。用户会自己审核后发布。即使用户原话说"发布到博客"/"publish to my blog"，本 skill 也只产出可发布草稿；真正发布必须作为用户审核后的新请求处理。
 
 确认草稿就位：
 - 文件在 `source/_drafts/<slug>.md`（仍在 `_drafts/`，不是 `_posts/`）
@@ -243,7 +243,7 @@ grep -rh "^tags:" source/_posts/*.md 2>/dev/null | sort -u
 
 - **标题含冒号或引号**：`hexo new draft "title: with colon"` 可能行为异常。测一下命令输出，必要时手工改文件名兜底。
 - **自动生成的 tags 重复**：`hexo new` 可能注入默认 `tags:` 字段，要**替换**不要**追加**。
-- **不要自动 publish**：即使用户原话说"发布到博客"/"publish to my blog"，本 skill 永远停在草稿。把这种话理解成"产出一份可发布的草稿"，而不是授权 `hexo publish`。**只有用户看过草稿后再明确要求发布时**，才能跑 `hexo publish "<slug>"`（注意：Hexo 按 slug 匹配而非完整 title；命令找不到草稿时，看 `source/_drafts/` 里实际文件名取 slug）。
+- **不要自动 publish**：即使用户原话说"发布到博客"/"publish to my blog"，本 skill 永远停在草稿。把这种话理解成"产出一份可发布的草稿"，而不是授权 `hexo publish`。如果用户审核后另行明确要求发布，那已经是本 skill 之外的新任务；注意 Hexo 按 slug 匹配而非完整 title，命令找不到草稿时，看 `source/_drafts/` 里实际文件名取 slug。
 
 ---
 
