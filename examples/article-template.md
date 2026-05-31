@@ -8,7 +8,6 @@ Use this file before Stage 2 and Stage 4. Keep the final draft concise, source-b
 # 标题：<动词 + 核心事实>
 
 > <80-140 字摘要。先给结论，再给关键数字或可信度边界。>
-
 ![配图](<cover-url>)
 
 ## <核心事实 1>

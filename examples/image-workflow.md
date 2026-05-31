@@ -1,6 +1,6 @@
 # Image Workflow
 
-Each article needs one image immediately after the blockquote summary. Do not upload or claim an image URL before user confirmation.
+Each article needs one image immediately after the blockquote summary, with no blank line between the blockquote and the image. Do not upload or claim an image URL before user confirmation.
 
 ## Pick The Image
 
@@ -55,11 +55,10 @@ Then continue the draft with a clear placeholder:
 
 ## Insert In Draft
 
-The image line must appear immediately after the summary blockquote:
+The image line must appear immediately after the summary blockquote. Do not leave a blank line between them:
 
 ```markdown
 > <摘要>
-
 ![配图](https://example.com/image.webp)
 
 ## <第一节>
