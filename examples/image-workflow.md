@@ -10,6 +10,8 @@ Prefer images in this order:
 2. User-provided local image path.
 3. A neutral generated/placeholder image only if no real product image exists and the user accepts it.
 
+If the user explicitly asks you to generate an image, generate a technology-style image whose content matches the article title. Save the generated image to the user's Desktop automatically, then show/mention that local Desktop path when asking whether to upload it.
+
 Avoid:
 
 - Dark, blurred, stock-like atmospheric images.
@@ -20,6 +22,8 @@ Avoid:
 ## Confirm Before Upload
 
 Before running any upload command, ask the user for explicit approval with the local file path or source image URL.
+
+For generated images, the local file path should be on the user's Desktop before this confirmation step. Generating and saving the image does not count as upload approval.
 
 Acceptable approvals include clear replies such as:
 
