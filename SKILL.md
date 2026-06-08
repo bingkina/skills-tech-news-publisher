@@ -139,6 +139,14 @@ AI 写作有几个肌肉记忆，主动反着来：
 
 Markdown 模板、Hexo frontmatter 示例、permalink 命名规则 —— 全部在 `examples/article-template.md`。写作前读取这个文件。
 
+模板生成逻辑保持不变：frontmatter、blockquote 摘要、紧跟摘要下一行的主题化图片 Markdown，仍按 `examples/article-template.md` 和 `examples/image-workflow.md` 生成。
+
+正文内容生成规则：
+- 将 Stage 1 收集到的事实、官方口径、可信度边界、来源列表整理成写作输入。
+- 使用 `article-writing` skill 的写作流程生成正文段落：先给具体事实或数字，再解释影响；句子紧，拒绝模板化过渡，不编造来源之外的事实。
+- 正文只写文章主体，不改写 frontmatter、blockquote 摘要和图片行；这些模板区块的生成逻辑保持不变。
+- 如果 `article-writing` skill 不可用，沿用本文的「科技情报分析师」角色和反 AI 腔调规则完成正文，但必须明确基于已收集信息写作。
+
 Title 关键规则（**这条必须遵守**）：
 - 动词 + 核心事实。不标题党，不用"震惊体"，不用问号（除非疑问本身就是新闻）。
 

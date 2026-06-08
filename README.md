@@ -24,7 +24,7 @@
 | 阶段 | 做什么 |
 |------|--------|
 | **Stage 1 研究** | 跨 5 个层次搜集信息，三角验证核心数据，每条信息归入 A/B/C 三档 |
-| **Stage 2 撰写** | 以「科技情报分析师」身份产出文章，遵循反 AI 腔调三层规范，并插入配图 |
+| **Stage 2 撰写** | 模板区块生成逻辑不变；正文使用 `article-writing` skill 基于已收集信息生成，并插入配图 |
 | **Stage 3 建草稿** | `hexo new draft "<title>"`，写入正文（去掉重复标题与来源段） |
 | **Stage 4 SEO** | 切换 SEO 优化师角色，grep 现有 taxonomy，配置 permalink / categories / tags / description |
 | **Stage 5 交付** | 草稿路径 + 信源列表交还用户，**不执行 `hexo publish`** |
