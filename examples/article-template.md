@@ -1,6 +1,6 @@
 # Article Template
 
-Use this file before Stage 2 and Stage 4. Keep the final draft concise, source-backed, and ready for Hexo frontmatter updates.
+Use this file before Stage 2 and Stage 4. Keep the final draft concise, evidence-backed, and ready for Hexo frontmatter updates.
 
 ## Working Article Shape
 
@@ -12,25 +12,23 @@ Use this file before Stage 2 and Stage 4. Keep the final draft concise, source-b
 
 ## <核心事实 1>
 
-<正文内容由 article-writing skill 基于已收集信息生成。先写新闻事实、技术变化、发布时间、价格、benchmark、上下文窗口、开源状态等。没有来源不要写。>
+<正文内容由 article-writing skill 基于已收集信息生成。写成科技博主的完整文章，而不是新闻摘抄或信源转述。先写核心事实、技术变化、发布时间、价格、benchmark、上下文窗口、开源状态等；信息没有可靠依据就不要写。>
 
 ## <核心事实 2>
 
-<继续由 article-writing skill 展开。解释它为什么值得读者关心。优先写具体约束：谁能用、成本多少、限制是什么、和上一代差异在哪里。>
+<继续由 article-writing skill 展开。解释它为什么值得读者关心。优先写具体约束：谁能用、成本多少、限制是什么、和上一代差异在哪里。不要写“根据某媒体/某公司博客/某新闻稿”。>
 
 ## <可信度边界>
 
-<由 article-writing skill 根据来源可信度收束。若主要信息来自官方通稿，明确写出“目前信息主要来自官方口径，暂无第三方独立评测/复现”。>
+<由 article-writing skill 根据可信度边界收束。不要点名信息源；可以写“目前还缺少独立评测/复现”“关键参数仍待实测”，把不确定性写成读者可理解的判断。>
 
-## 来源引用 (Sources)
-
-- <source title>: <url>
-- <source title>: <url>
 ```
 
-Frontmatter、blockquote 摘要和图片 Markdown 行的生成逻辑保持不变。正文段落使用 `article-writing` skill 根据 Stage 1 收集到的信息生成，不得改写模板区块，也不得补来源之外的事实。
+Frontmatter、blockquote 摘要和图片 Markdown 行的生成逻辑保持不变。正文段落使用 `article-writing` skill 根据 Stage 1 收集到的信息生成，不得改写模板区块，也不得补可靠信息之外的事实。
 
-Stage 3 writes the article into `source/_drafts/<slug>.md` and removes both the `# 标题：...` line and the whole `## 来源引用 (Sources)` section from the saved draft.
+正文禁止出现信息源名称、来源列表或来源转述句式，例如“根据 X 新闻”“据 X 报道”“X 博客称”“官方公告显示”。不要在正文生成 `## 来源引用 (Sources)` 段；信源只用于内部校验和最终交付给用户，不写进文章主体。
+
+Stage 3 writes the article into `source/_drafts/<slug>.md` and removes the `# 标题：...` line from the saved draft. If a legacy generation accidentally includes `## 来源引用 (Sources)`, remove that whole section before saving.
 
 ## Title Rules
 

@@ -1,6 +1,6 @@
 # Tone Samples
 
-Use these examples as calibration. The target voice is cold, precise, and source-aware.
+Use these examples as calibration. The target voice is precise, blog-like, and evidence-aware. The article should read like a tech blogger's analysis, not a source-by-source news digest.
 
 ## Launch News
 
@@ -10,7 +10,7 @@ Bad:
 
 Good:
 
-> 某公司发布 Alpha 模型。官方称推理延迟下降 18%，API 输入价格不变。第三方 benchmark 还没有稳定复现，现阶段只能把性能提升视为官方口径。
+> 某公司发布 Alpha 模型。推理延迟标称下降 18%，API 输入价格不变。第三方 benchmark 还没有稳定复现，现阶段不能把性能提升当成实测结论。
 
 ## Funding News
 
@@ -20,7 +20,7 @@ Bad:
 
 Good:
 
-> 公司完成 2 亿美元 B 轮融资。领投方是 X，投后估值未披露。融资用途集中在企业销售和推理基础设施，没有公布收入、留存率或客户续约数据。
+> 公司完成 2 亿美元 B 轮融资，投后估值未披露。这笔钱主要会流向企业销售和推理基础设施。收入、留存率和客户续约数据都没有公开，所以还不能判断它是不是已经跑通商业化。
 
 ## Product Comparison
 
@@ -30,7 +30,7 @@ Bad:
 
 Good:
 
-> 新版本把上下文窗口从 128K 提到 256K，价格不变。官方没有公布长上下文召回率测试，实际收益取决于检索和引用稳定性。
+> 新版本把上下文窗口从 128K 提到 256K，价格不变。长上下文召回率还缺少公开实测，实际收益取决于检索和引用稳定性。
 
 ## PR Rewrite Signal
 
@@ -40,12 +40,13 @@ Bad:
 
 Good:
 
-> 目前中文报道措辞高度相似，基本转引官方通稿。没有看到独立评测、GitHub issue 复现记录或开发者长测。
+> 目前能看到的信息口径高度一致，独立评测、GitHub issue 复现记录和开发者长测都还缺位。这类产品先看 demo 很容易兴奋，真正的判断点在连续使用一周后的稳定性。
 
 ## Editing Checklist
 
 - Delete empty openers: `随着`, `近年来`, `在这个时代`.
 - Delete broad conclusions: `未来可期`, `值得期待`, `打开新的可能性`.
 - Replace adjectives with numbers when numbers exist.
-- Keep attribution visible when the fact only comes from a company blog or press release.
+- Keep attribution in the research notes and handoff, not in the article body.
+- Do not write `根据 X 新闻`, `据 X 报道`, `X 博客称`, `官方公告显示`, or source lists in the saved draft.
 - Do not end every section with `这意味着...`.
