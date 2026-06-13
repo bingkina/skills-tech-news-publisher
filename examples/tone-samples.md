@@ -40,7 +40,7 @@ Bad:
 
 Good:
 
-> 目前能看到的信息口径高度一致，独立评测、GitHub issue 复现记录和开发者长测都还缺位。这类产品先看 demo 很容易兴奋，真正的判断点在连续使用一周后的稳定性。
+> 目前能看到的发布说法高度一致，独立评测、GitHub issue 复现记录和开发者长测都还缺位。这类产品先看 demo 很容易兴奋，真正的判断点在连续使用一周后的稳定性。
 
 ## Editing Checklist
 
@@ -49,4 +49,5 @@ Good:
 - Replace adjectives with numbers when numbers exist.
 - Keep attribution in the research notes and handoff, not in the article body.
 - Do not write `根据 X 新闻`, `据 X 报道`, `X 博客称`, `官方公告显示`, or source lists in the saved draft.
+- Do not use `口径` in article body; prefer `产品宣称`, `发布说法`, or `现有信息`.
 - Do not end every section with `这意味着...`.
