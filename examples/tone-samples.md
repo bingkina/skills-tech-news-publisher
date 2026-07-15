@@ -1,6 +1,6 @@
 # Tone Samples
 
-Use these examples as calibration. The target voice is precise, blog-like, and evidence-aware. The article should read like a tech blogger's analysis, not a source-by-source news digest.
+Use these examples as calibration. The target voice is precise, easy to understand, and useful to a broad audience. The article should read like a technology explainer for everyday users, not a source-by-source news digest or an internal research memo.
 
 ## Launch News
 
@@ -10,7 +10,7 @@ Bad:
 
 Good:
 
-> 某公司发布 Alpha 模型。推理延迟标称下降 18%，API 输入价格不变。第三方 benchmark 还没有稳定复现，现阶段不能把性能提升当成实测结论。
+> 某公司发布 Alpha 模型，并已开放 API。输入价格保持不变，开发者可以沿用现有接口接入。Alpha 模型支持文本和图片输入，普通用户可通过网页端直接体验。
 
 ## Funding News
 
@@ -20,7 +20,7 @@ Bad:
 
 Good:
 
-> 公司完成 2 亿美元 B 轮融资，投后估值未披露。这笔钱主要会流向企业销售和推理基础设施。收入、留存率和客户续约数据都没有公开，所以还不能判断它是不是已经跑通商业化。
+> 公司完成 2 亿美元 B 轮融资。本轮资金将用于扩充企业服务团队和推理基础设施，也就是承载模型运行的服务器与计算资源。
 
 ## Product Comparison
 
@@ -30,7 +30,7 @@ Bad:
 
 Good:
 
-> 新版本把上下文窗口从 128K 提到 256K，价格不变。长上下文召回率还缺少公开实测，实际收益取决于检索和引用稳定性。
+> 新版本把上下文窗口从 128K 提到 256K，价格不变。上下文窗口决定模型一次能处理多少内容；容量翻倍后，用户可以直接放入更长的文档或更多轮对话。
 
 ## PR Rewrite Signal
 
@@ -40,7 +40,7 @@ Bad:
 
 Good:
 
-> 目前能看到的发布说法高度一致，独立评测、GitHub issue 复现记录和开发者长测都还缺位。这类产品先看 demo 很容易兴奋，真正的判断点在连续使用一周后的稳定性。
+> 产品已开放网页端和 API，个人用户可以直接注册使用。网页端适合日常问答和文档处理，API 面向需要把能力接入现有软件的开发者。
 
 ## Editing Checklist
 
@@ -49,5 +49,6 @@ Good:
 - Replace adjectives with numbers when numbers exist.
 - Keep attribution in the research notes and handoff, not in the article body.
 - Do not write `根据 X 新闻`, `据 X 报道`, `X 博客称`, `官方公告显示`, or source lists in the saved draft.
-- Do not use `口径` in article body; prefer `产品宣称`, `发布说法`, or `现有信息`.
+- Delete unconfirmed information instead of writing absence statements such as `目前尚不明确`, `尚未披露`, `未公布`, `没有官方口径`, `缺少独立评测`, `仍待实测`, `待核实`, `不能判断`, or synonyms.
+- Assume a broad audience. Explain an unfamiliar term once in plain Chinese, then return to what users can do with the product or information.
 - Do not end every section with `这意味着...`.

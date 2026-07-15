@@ -7,26 +7,28 @@ Use this file before Stage 2 and Stage 4. Keep the final draft concise, evidence
 ```markdown
 # 标题：<动词 + 核心事实>
 
-> <80-140 字摘要。先给结论，再给关键数字或可信度边界。>
+> <80-140 字摘要。先说明发生了什么，再给已经确认的关键数字、使用入口或用户影响。不要写任何未确认信息或信息空缺。>
 ![<文章核心关键词 + 图片内容描述>](<cover-url>)
 
 ## <核心事实 1>
 
-<正文内容由 article-writing skill 基于已收集信息生成。写成科技博主的完整文章，而不是新闻摘抄或信源转述。先写核心事实、技术变化、发布时间、价格、benchmark、上下文窗口、开源状态等；信息没有可靠依据就不要写。>
+<正文内容由 article-writing skill 基于已确认信息生成。写成普通用户能读懂的完整文章，而不是新闻摘抄或信源转述。先说明产品或事件是什么，再写已确认的技术变化、发布时间、价格、使用入口、benchmark、上下文窗口、开源状态等；信息没有可靠依据就整条删除。>
 
 ## <核心事实 2>
 
-<继续由 article-writing skill 展开。解释它为什么值得读者关心。优先写具体约束：谁能用、成本多少、限制是什么、和上一代差异在哪里。不要写“根据某媒体/某公司博客/某新闻稿”。>
+<继续由 article-writing skill 展开。解释普通用户能否使用、如何使用、成本多少、和上一代有什么已确认的差异。首次出现的技术术语用一句白话解释。不要写“根据某媒体/某公司博客/某新闻稿”。>
 
-## <可信度边界>
+## <用户怎么用>
 
-<由 article-writing skill 根据可信度边界收束。不要点名信息源；可以写“目前还缺少独立评测/复现”“关键参数仍待实测”，把不确定性写成读者可理解的判断。>
+<只写已经确认的开放范围、入口、步骤、价格或适用场景。没有确认的信息就不设对应小节，不用“尚不明确”“未公布”“没有官方口径”“缺少独立评测”“仍待实测”等句子占位。>
 
 ```
 
-Frontmatter、blockquote 摘要和图片 Markdown 行的生成逻辑保持不变。正文段落使用 `article-writing` skill 根据 Stage 1 收集到的信息生成，不得改写模板区块，也不得补可靠信息之外的事实。
+Frontmatter、blockquote 摘要和图片 Markdown 行的生成逻辑保持不变。`<cover-url>` 必须来自 `examples/image-workflow.md` 生成并经用户确认上传的 Image 2 主题图；生成或上传失败时使用 `待补图`，不得改用网络图片或伪造 URL。正文段落使用 `article-writing` skill 根据 Stage 1 的 A 档已确认事实生成，不得改写模板区块，也不得补可靠信息之外的事实。
 
 正文禁止出现信息源名称、来源列表或来源转述句式，例如“根据 X 新闻”“据 X 报道”“X 博客称”“官方公告显示”。不要在正文生成 `## 来源引用 (Sources)` 段；信源只用于内部校验和最终交付给用户，不写进文章主体。
+
+正文也禁止把信息空缺当作内容，包括“目前尚不明确”“尚未披露”“未公布”“没有官方口径”“暂无官方信息”“缺少独立评测”“仍待实测”“待核实”“不能判断”“有待观察”及同义改写。遇到这类信息时，删除整条内容和对应小节。
 
 Stage 3 writes the article into `source/_drafts/<slug>.md` and removes the `# 标题：...` line from the saved draft. If a legacy generation accidentally includes `## 来源引用 (Sources)`, remove that whole section before saving.
 
@@ -58,7 +60,7 @@ tags:
   - Alpha 模型
   - API
   - 大模型
-description: 某公司发布 Alpha 模型，API 价格保持不变。本文梳理官方参数、可用渠道、定价变化和第三方评测缺口。
+description: 某公司发布 Alpha 模型，API 价格保持不变。本文梳理主要功能、可用渠道、定价变化，以及普通用户可以直接使用的入口。
 ---
 ```
 
