@@ -2,6 +2,8 @@
 
 Each article needs one generated image immediately after the blockquote summary, with no blank line between the blockquote and the image. Generate it from the finalized article with built-in `image_gen` (Image 2). Generation is automatic; upload still requires explicit user confirmation. The Markdown image alt/name must be specific to the article topic and useful for SEO; do not use generic `配图`.
 
+The live rules in `SKILL.md` and this file override old conversation memory, old workflow summaries, and generic `imagegen` examples. Never copy a generic `no text` or `no logos` constraint into an article-cover prompt unless the user explicitly requests it or the finalized article provides no accurate text or confirmed brand mark to use.
+
 ## Build The Prompt
 
 Generate the cover only after the title, summary, and body are finalized. Build the prompt from:
@@ -12,6 +14,15 @@ Generate the cover only after the title, summary, and body are finalized. Build 
 4. The central user-facing idea: what the product or event lets people do.
 
 Do not include B/C-grade claims, rumors, unknown features, speculative impact, or information gaps. If an exact interface, product appearance, chart, number, or logo cannot be confirmed, do not depict it.
+
+Make an explicit editorial choice for text and brand marks instead of silently banning them:
+
+- Title text is allowed. If included, provide the finalized article title verbatim and require exact rendering.
+- A confirmed brand Logo is allowed when the brand identity is supported by A-grade evidence. Require an accurate, undistorted mark.
+- Do not add `no text`, `no logo`, `no logos`, `无文字`, or `无品牌标志` as a default safety constraint.
+- Style title typography from the image composition and palette. Use a readable dark neutral base plus one or two restrained image-derived or brand-derived accent colors for key entities, actions, or status phrases; do not render the whole title as a monotonous pure-black line by default.
+- Keep title color hierarchy suitable for thumbnail reading. Avoid rainbow coloring, neon accents, low contrast, heavy outlines, and decoration unrelated to the image.
+- If one claim or mark is inaccurate, correct only that element. Do not remove all other accurate text or confirmed branding unless the user requests a text-free or brand-free image.
 
 Use this prompt structure:
 
@@ -24,7 +35,10 @@ Style/medium: clean editorial technology illustration, polished and approachable
 Composition/framing: wide landscape cover, clear focal point, readable at thumbnail size
 Lighting/mood: bright, clear, confident, not dramatic
 Color palette: modern restrained technology colors with good contrast
-Constraints: use only confirmed article details; no watermark, no fake UI, no unsupported product details or numbers
+Text (verbatim): "<finalized article title>" if title text is used; otherwise state the editorial reason for omitting text
+Typography: derive a restrained hierarchy from the image palette; use a dark neutral base and 1–2 coordinated accent colors for key words or status; preserve exact text and thumbnail readability; avoid a flat all-black title
+Brand marks: <confirmed brand Logo and required accuracy> if used; otherwise omit this line
+Constraints: use only confirmed article details; no watermark, no fake UI, no inaccurate text, no distorted or unverified brand marks, no unsupported product details or numbers
 Avoid: dark neon stock imagery, generic circuit-board backgrounds, visual clutter, hype, science-fiction elements unrelated to the article
 ```
 
@@ -33,6 +47,14 @@ Avoid: dark neon stock imagery, generic circuit-board backgrounds, visual clutte
 Use built-in `image_gen` (Image 2) by default. Do not search for or download official screenshots, launch-blog images, OpenGraph images, press-kit assets, or stock images as substitutes.
 
 Generate one strong cover first. Inspect it for subject relevance, factual consistency, composition, the accuracy of any included title text or logos, fake interfaces, and unsupported details. If it fails, iterate with one targeted correction.
+
+Treat factual correction as a minimal edit:
+
+- If generated text contains an unsupported claim, remove or replace that claim only.
+- If title text is misspelled, correct the title text while preserving accurate visual elements.
+- If the title is accurate but visually flat or entirely black, edit only its typography, color hierarchy, weight, spacing, or subtle accents to match the image; preserve the exact title and every other accurate element.
+- If a Logo is distorted or unverified, correct or remove that Logo only.
+- Do not turn a targeted correction into a blanket text-free and brand-free redesign unless the user explicitly requests it.
 
 Copy the selected generated file out of the default generated-images location and save it to the user's Desktop with a stable descriptive name:
 
