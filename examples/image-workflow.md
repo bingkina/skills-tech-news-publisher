@@ -24,7 +24,7 @@ Style/medium: clean editorial technology illustration, polished and approachable
 Composition/framing: wide landscape cover, clear focal point, readable at thumbnail size
 Lighting/mood: bright, clear, confident, not dramatic
 Color palette: modern restrained technology colors with good contrast
-Constraints: use only confirmed article details; no text, no logos, no watermark, no fake UI, no unsupported product details or numbers
+Constraints: use only confirmed article details; no watermark, no fake UI, no unsupported product details or numbers
 Avoid: dark neon stock imagery, generic circuit-board backgrounds, visual clutter, hype, science-fiction elements unrelated to the article
 ```
 
@@ -32,7 +32,7 @@ Avoid: dark neon stock imagery, generic circuit-board backgrounds, visual clutte
 
 Use built-in `image_gen` (Image 2) by default. Do not search for or download official screenshots, launch-blog images, OpenGraph images, press-kit assets, or stock images as substitutes.
 
-Generate one strong cover first. Inspect it for subject relevance, factual consistency, composition, accidental text, logos, fake interfaces, and unsupported details. If it fails, iterate with one targeted correction.
+Generate one strong cover first. Inspect it for subject relevance, factual consistency, composition, the accuracy of any included title text or logos, fake interfaces, and unsupported details. If it fails, iterate with one targeted correction.
 
 Copy the selected generated file out of the default generated-images location and save it to the user's Desktop with a stable descriptive name:
 
@@ -47,7 +47,7 @@ Avoid:
 - Dark, blurred, stock-like atmospheric images.
 - Fake UI screenshots.
 - Unverified product appearance, features, benchmark numbers, or charts.
-- In-image titles, captions, logos, brand marks, and watermarks.
+- Watermarks, inaccurate text, and unverified or distorted brand marks.
 - Decorative robots, holograms, circuit boards, or code rain unrelated to the article.
 
 ## Confirm Before Upload
