@@ -1,6 +1,6 @@
 # Image Workflow
 
-Each article needs one generated image immediately after the blockquote summary, with no blank line between the blockquote and the image. Generate it from the finalized article with built-in `image_gen` (Image 2). Generation is automatic; upload still requires explicit user confirmation. The Markdown image alt/name must be specific to the article topic and useful for SEO; do not use generic `配图`.
+Each article needs one generated cover immediately after the blockquote summary, with no blank line between the blockquote and the image. Generate it from the finalized article with built-in `image_gen` (Image 2). If the body discusses an A-grade data chart, also add that chart near the paragraph it supports by following **Handle Data Charts** below. Generation and chart capture are automatic; every upload still requires explicit user confirmation. Every Markdown image alt/name must be specific to the article topic and useful for SEO; do not use generic `配图`.
 
 The live rules in `SKILL.md` and this file override old conversation memory, old workflow summaries, and generic `imagegen` examples. Never copy a generic `no text` or `no logos` constraint into an article-cover prompt unless the user explicitly requests it or the finalized article provides no accurate text or confirmed brand mark to use.
 
@@ -44,7 +44,7 @@ Avoid: dark neon stock imagery, generic circuit-board backgrounds, visual clutte
 
 ## Generate And Save
 
-Use built-in `image_gen` (Image 2) by default. Do not search for or download official screenshots, launch-blog images, OpenGraph images, press-kit assets, or stock images as substitutes.
+Use built-in `image_gen` (Image 2) by default for the cover. Do not search for or download official screenshots, launch-blog images, OpenGraph images, press-kit assets, or stock images as cover substitutes. An original data-chart screenshot required by **Handle Data Charts** is the only default exception.
 
 Generate one strong cover first. Inspect it for subject relevance, factual consistency, composition, the accuracy of any included title text or logos, fake interfaces, and unsupported details. If it fails, iterate with one targeted correction.
 
@@ -72,11 +72,34 @@ Avoid:
 - Watermarks, inaccurate text, and unverified or distorted brand marks.
 - Decorative robots, holograms, circuit boards, or code rain unrelated to the article.
 
+## Handle Data Charts
+
+When the article discusses an A-grade data chart, capture the original chart and insert it next to the paragraph that explains it. Do not add charts merely as decoration.
+
+1. Open the authoritative source page or PDF and capture only the relevant chart.
+2. Crop surrounding navigation and unrelated content, but preserve the chart title, axes, legends, units, labels, data points, and any necessary source mark already present in the original.
+3. Save the screenshot to a stable local path and inspect it at the article's actual display width. Treat labels, ticks, or values that cannot be read without opening the original-size file as unclear.
+4. If the screenshot is clear, use it. Do not regenerate a clear chart.
+5. If it is unclear, use `image_gen` (Image 2) to recreate the chart from the screenshot and the separately verified A-grade data. Specify the exact chart type, title, axis labels, legend, units, and every value. Require a small `根据 <来源> 数据重制` attribution.
+6. Compare every label and value in the result against the verified source. Make targeted corrections for any mismatch. If the result still contains wrong text, wrong values, missing data, or misleading visual proportions, do not use it; report the failure and insert `待补图`.
+
+Example body placement:
+
+```markdown
+## <正文小节>
+
+<解释图表所支持的已确认结论。>
+
+![<指标名称 + 对比范围 + 图表类型>](<chart-url>)
+```
+
+The original source mark inside a screenshot or the required attribution on a recreated chart is an integrity label, not a prose source list. Do not remove it to satisfy the article's no-source-list writing rule.
+
 ## Confirm Before Upload
 
-Before running any upload command, ask the user for explicit approval with the generated-image preview and local file path.
+Before running any upload command, ask the user for explicit approval with previews and local paths for the cover and any inline charts.
 
-The local file path must be on the user's Desktop before this confirmation step. Generating, saving, and previewing the image do not count as upload approval.
+Every selected cover or chart file must be on the user's Desktop before this confirmation step. Generating or capturing, saving, and previewing an image do not count as upload approval.
 
 Acceptable approvals include clear replies such as:
 
