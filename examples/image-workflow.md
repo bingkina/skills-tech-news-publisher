@@ -46,6 +46,8 @@ Avoid: dark neon stock imagery, generic circuit-board backgrounds, visual clutte
 
 Use built-in `image_gen` (Image 2) by default for the cover. Do not search for or download official screenshots, launch-blog images, OpenGraph images, press-kit assets, or stock images as cover substitutes. An original data-chart screenshot required by **Handle Data Charts** is the only default exception.
 
+A verified official Logo asset used only as a targeted edit reference is not a cover substitute. When a confirmed brand Logo needs correction, obtain the reference from the brand's official website or official brand resources; do not use an unverified third-party redraw.
+
 Generate one strong cover first. Inspect it for subject relevance, factual consistency, composition, the accuracy of any included title text or logos, fake interfaces, and unsupported details. If it fails, iterate with one targeted correction.
 
 Treat factual correction as a minimal edit:
@@ -53,7 +55,8 @@ Treat factual correction as a minimal edit:
 - If generated text contains an unsupported claim, remove or replace that claim only.
 - If title text is misspelled, correct the title text while preserving accurate visual elements.
 - If the title is accurate but visually flat or entirely black, edit only its typography, color hierarchy, weight, spacing, or subtle accents to match the image; preserve the exact title and every other accurate element.
-- If a Logo is distorted or unverified, correct or remove that Logo only.
+- If a confirmed brand Logo is distorted, first use a verified official Logo reference for a targeted edit and re-check its shape, spelling, proportions, and brand identity. Do not replace it with a neutral or unbranded icon merely because the first generation was distorted.
+- Only if the reference-guided correction still fails the accuracy check may you remove that Logo or replace only that Logo with a neutral, unbranded icon. If the mark itself is unverified, remove only that mark rather than attempting to preserve it.
 - Do not turn a targeted correction into a blanket text-free and brand-free redesign unless the user explicitly requests it.
 
 Copy the selected generated file out of the default generated-images location and save it to the user's Desktop with a stable descriptive name:
