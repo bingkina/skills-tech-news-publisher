@@ -1,6 +1,6 @@
 # Image Workflow
 
-Each article needs one generated cover immediately after the blockquote summary, with no blank line between the blockquote and the image. Generate it from the finalized article with built-in `image_gen` (Image 2). If the body discusses an A-grade data chart, also add that chart near the paragraph it supports by following **Handle Data Charts** below. Generation and chart capture are automatic; every upload still requires explicit user confirmation. Every Markdown image alt/name must be specific to the article topic and useful for SEO; do not use generic `配图`.
+Each article needs one generated 5:2 cover immediately after the blockquote summary, with no blank line between the blockquote and the image. Generate it from the finalized article with built-in `image_gen` (Image 2). If the body discusses an A-grade data chart, also add that chart near the paragraph it supports by following **Handle Data Charts** below. Generation and chart capture are automatic; every upload still requires explicit user confirmation. Every Markdown image alt/name must be specific to the article topic and useful for SEO; do not use generic `配图`. The 5:2 ratio applies only to the cover, not to inline data charts.
 
 The live rules in `SKILL.md` and this file override old conversation memory, old workflow summaries, and generic `imagegen` examples. Never copy a generic `no text` or `no logos` constraint into an article-cover prompt unless the user explicitly requests it or the finalized article provides no accurate text or confirmed brand mark to use.
 
@@ -18,6 +18,8 @@ Do not include B/C-grade claims, rumors, unknown features, speculative impact, o
 Make an explicit editorial choice for text and brand marks instead of silently banning them:
 
 - Title text is allowed. If included, provide the finalized article title verbatim and require exact rendering.
+- Finalized-title accuracy is not a title-only rule. Unless the user explicitly requests a title-only cover, do not state, infer, or enforce that all other readable copy must be removed.
+- Additional readable copy is allowed when its exact wording is supported by A-grade facts and it does not create a fake interface. Judge it by factual accuracy, not by whether it repeats the title.
 - A confirmed brand Logo is allowed when the brand identity is supported by A-grade evidence. Require an accurate, undistorted mark.
 - Do not add `no text`, `no logo`, `no logos`, `无文字`, or `无品牌标志` as a default safety constraint.
 - Style title typography from the image composition and palette. Use a readable dark neutral base plus one or two restrained image-derived or brand-derived accent colors for key entities, actions, or status phrases; do not render the whole title as a monotonous pure-black line by default.
@@ -32,10 +34,11 @@ Asset type: Chinese technology news article cover
 Primary request: create a visual cover for “<article title>” based on <confirmed subject and user-facing change>
 Subject: <concrete objects or scene supported by the article>
 Style/medium: clean editorial technology illustration, polished and approachable
-Composition/framing: wide landscape cover, clear focal point, readable at thumbnail size
+Composition/framing: exact 5:2 wide landscape canvas, clear focal point, readable at thumbnail size
 Lighting/mood: bright, clear, confident, not dramatic
 Color palette: modern restrained technology colors with good contrast
-Text (verbatim): "<finalized article title>" if title text is used; otherwise state the editorial reason for omitting text
+Title text (verbatim): "<finalized article title>" if title text is used; otherwise state the editorial reason for omitting it
+Additional copy (verbatim): "<exact A-grade-supported copy and its visual purpose>" if additional readable copy is used; otherwise omit this line
 Typography: derive a restrained hierarchy from the image palette; use a dark neutral base and 1–2 coordinated accent colors for key words or status; preserve exact text and thumbnail readability; avoid a flat all-black title
 Brand marks: <confirmed brand Logo and required accuracy> if used; otherwise omit this line
 Constraints: use only confirmed article details; no watermark, no fake UI, no inaccurate text, no distorted or unverified brand marks, no unsupported product details or numbers
@@ -48,11 +51,12 @@ Use built-in `image_gen` (Image 2) by default for the cover. Do not search for o
 
 A verified official Logo asset used only as a targeted edit reference is not a cover substitute. When a confirmed brand Logo needs correction, obtain the reference from the brand's official website or official brand resources; do not use an unverified third-party redraw.
 
-Generate one strong cover first. Inspect it for subject relevance, factual consistency, composition, the accuracy of any included title text or logos, fake interfaces, and unsupported details. If it fails, iterate with one targeted correction.
+Generate one strong cover first. Inspect it for subject relevance, factual consistency, composition, the accuracy of any included title text, additional readable copy, or logos, fake interfaces, unsupported details, and an exact 5:2 canvas ratio. Verify the actual pixel dimensions before preview or upload (for example, 2000×800). If the ratio is wrong, crop or extend the canvas only when the title, Logo, and focal subject remain intact; otherwise regenerate. Never stretch or squeeze the image to force the ratio. If another check fails, iterate with one targeted correction.
 
 Treat factual correction as a minimal edit:
 
 - If generated text contains an unsupported claim, remove or replace that claim only.
+- Do not remove accurate A-grade-supported copy merely because it is not the article title. If unsupported panel copy must be removed, replace it with confirmed wording or clearly non-text visual elements, not abstract glyphs, pseudo-text, or decorative gibberish.
 - If title text is misspelled, correct the title text while preserving accurate visual elements.
 - If the title is accurate but visually flat or entirely black, edit only its typography, color hierarchy, weight, spacing, or subtle accents to match the image; preserve the exact title and every other accurate element.
 - If a confirmed brand Logo is distorted, first use a verified official Logo reference for a targeted edit and re-check its shape, spelling, proportions, and brand identity. Do not replace it with a neutral or unbranded icon merely because the first generation was distorted.
@@ -114,7 +118,7 @@ Acceptable approvals include clear replies such as:
 
 If the user does not approve, do not upload.
 
-If the user requests a revision, make the requested single change with `image_gen`, save a new versioned file such as `<article-slug>-cover-v2.png`, show it, and ask for upload confirmation again.
+If the user requests a revision, make the requested single change with `image_gen`, preserve the exact 5:2 cover ratio, save a new versioned file such as `<article-slug>-cover-v2.png`, show it, and ask for upload confirmation again.
 
 ## Upload
 
