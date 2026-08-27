@@ -33,6 +33,17 @@ Frontmatter、blockquote 摘要和封面图 Markdown 行的生成逻辑保持不
 
 正文也禁止把信息空缺当作内容，包括“目前尚不明确”“尚未披露”“未公布”“没有官方口径”“暂无官方信息”“缺少独立评测”“仍待实测”“待核实”“不能判断”“有待观察”及同义改写。遇到这类信息时，删除整条内容和对应小节。
 
+## 开源表述规则
+
+- 面向普通读者统一写“<项目或模型名> 开源”，不要写“开放权重”“开放模型权重”“公开权重”“权重开放”或类似行业表述。
+- 英文信源使用 `open-weight`、`open weights`、`weights available` 等说法时，文章标题、摘要、正文和 SEO description 均转换为“开源”，不要直译或展开成“开放……权重”。
+- 只改变措辞，不扩大事实范围。许可证、代码、训练数据或商用限制只有在得到 A 档事实支持且对读者有用时才单独说明；不要因为使用“开源”一词就自行补写这些内容。
+
+示例：
+
+- 不写：`某公司开放 Alpha 模型权重`
+- 改写：`某公司开源 Alpha 模型`
+
 Stage 3 writes the article into `source/_drafts/<slug>.md` and removes the `# 标题：...` line from the saved draft. If a legacy generation accidentally includes `## 来源引用 (Sources)`, remove that whole section before saving.
 
 ## Title Rules
