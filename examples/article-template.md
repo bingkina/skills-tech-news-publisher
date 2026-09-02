@@ -18,6 +18,8 @@ Use this file before Stage 2 and Stage 4. Keep the final draft concise, evidence
 
 <继续由 article-writing skill 展开。解释普通用户能否使用、如何使用、成本多少、和上一代有什么已确认的差异。首次出现的技术术语用一句白话解释。不要写“根据某媒体/某公司博客/某新闻稿”。>
 
+<!-- 如果已有文章或专题能帮助读者理解当前事实，在相关句子中加入 1–3 个上下文内链。锚文本应直接说明目标内容，不写“点击这里”“更多内容”。 -->
+
 <!-- 仅当本节讨论 A 档数据图表时插入；优先使用清晰原图截图，不清晰时按 image-workflow.md 用 Image 2 根据已核验数据重制。 -->
 ![<指标名称 + 对比范围 + 图表类型>](<chart-url>)
 
@@ -75,6 +77,13 @@ tags:
   - API
   - 大模型
 description: 某公司发布 Alpha 模型，API 价格保持不变。本文梳理主要功能、可用渠道、定价变化，以及普通用户可以直接使用的入口。
+sources:
+  - name: 某公司 Alpha 模型官方公告
+    url: https://example.com/alpha-model
+    note: 发布日期、功能范围与使用入口
+  - name: Alpha API 官方定价文档
+    url: https://example.com/alpha-api-pricing
+    note: API 价格
 ---
 ```
 

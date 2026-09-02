@@ -5,7 +5,7 @@ description: Research a tech news headline, product, paper, funding event, or in
 
 # Tech News Publisher (科技情报简讯发布器)
 
-把一个标题或话题转成 Hexo 草稿，留给用户审核后手动发布。流程：研究 → 写作 → 建草稿 → SEO 优化。**到草稿为止，不自动 publish。**
+把一个标题或话题转成 Hexo 草稿，留给用户审核后手动发布。流程：SEO 选题简报 → 研究 → 写作 → 建草稿 → SEO 优化 → 生成验证。**到草稿为止，不自动 publish。**
 
 ---
 
@@ -49,6 +49,16 @@ description: Research a tech news headline, product, paper, funding event, or in
 - 当前工作目录是 Hexo 项目根（验证：`_config.yml` 和 `source/_posts/` 都存在）。不是的话先切到可确认的 Hexo 项目根；找不到再问用户。
 - 环境里有 `hexo` CLI。
 - 可以联网搜索。
+
+---
+
+## Stage 0 — SEO brief and duplicate-angle check
+
+研究前读取 `examples/seo-workflow.md`，生成内部 SEO Brief。先扫描 `source/_posts/` 与 `source/_drafts/`，核对同一实体、事件、标题关键词、permalink 和报道角度；使用 `rg`，不要依赖可能因空 glob 失败的 shell 通配符。
+
+SEO Brief 至少记录：核心实体、事件类型、主要搜索意图、需要回答的用户问题、已有相关文章、可用专题页、差异化角度、候选标题和候选 slug。它只用于控制选题和写作，不写进文章。
+
+如果已有文章覆盖同一事件和同一意图，优先换成有 A 档事实支撑的独立角度；没有独立价值时停止生成，向用户说明重复情况。不要为覆盖关键词而生产近似重复文章。
 
 ---
 
@@ -159,7 +169,7 @@ Title 关键规则（**这条必须遵守**）：
 
 每篇在 blockquote 摘要之后必须配一张图。根据文章标题、摘要和 A 档已确认事实，使用内置 `image_gen`（Image 2）生成文章主题图。**详细流程在 `examples/image-workflow.md`**，包括提示词构建、生成、用户确认、上传和失败兜底。
 
-写作阶段执行配图时读取这个文件。
+写作阶段执行配图时读取这个文件。正文结构、上下文内链和搜索意图覆盖同时遵循 `examples/seo-workflow.md`。
 
 **配图的硬性规则**（在主文件里强调，不放到 examples）：
 - **文章正文与摘要定稿后自动生成配图，不等待用户另行提出生图要求**
@@ -202,7 +212,8 @@ Title 关键规则（**这条必须遵守**）：
    - 正文默认不生成 `## 来源引用 (Sources)` 段落；如果旧模板或模型误生成，**整段删掉**，含标题和所有 bullet
    - 扫描标题、摘要、正文和 description，删除“尚不明确”“未公布”“没有官方口径”“缺少独立评测”“仍待实测”“待核实”等信息空缺句；如果一个小节只剩此类内容，删除整个小节
    - 保留 blockquote 摘要、紧跟摘要下一行的主题化封面图（如 `![Kimi Work 办公智能体界面](...)`）、正文数据图表及其必要来源标记、所有 `## 技术/事件点 X` 段落及其内容
-6. 验证文件正常（frontmatter 完整、正文只含已确认内容、无信息空缺句、无重复标题、无 Sources 段）
+6. 把 Stage 1 最终采用的信源写入 frontmatter `sources`。每项必须含准确的 `name` 与无凭据 HTTP(S) `url`，可选 `note` 说明它核对了什么。优先保留官方公告、文档、论文、代码仓库或监管文件；`sources` 不得为空。正文不生成 Sources 段，站点模板会负责展示“原始来源”并生成 citation。
+7. 验证文件正常（frontmatter 完整、`sources` 有效且非空、正文只含已确认内容、无信息空缺句、无重复标题、无 Sources 段）
 
 ---
 
@@ -240,31 +251,46 @@ grep -rh "^tags:" source/_posts/*.md 2>/dev/null | sort -u
    - 必须新增时 → 先问用户
 
 3. **Tags**
-   - 3–5 个，混合核心词与长尾词
-   - **优先复用** taxonomy 扫描得到的现有 tags —— 这关乎 aggregate page 的内链权重，不只是风格偏好
+   - 通常 2–5 个，使用稳定的实体名、产品名和主题词，不把一次性长尾搜索短语当 tag
+   - **优先复用** taxonomy 扫描得到的现有 tags —— 站点的相关文章由共享 tag 驱动，过细或仅出现一次的 tag 会削弱关联
    - 只有真正全新的实体（首次出现的新模型、首次报道的公司）才引入新 tag
 
 4. **Description**
-   - 80–150 个**汉字**（不是字节，不是英文单词）
-   - 核心关键词必须在前 50 字内出现
-   - 应回应痛点或传递价值感，驱动 SERP 点击。但仍然不允许 AI 腔调的夸张表达
+   - 写成准确、独一且可独立理解的一至两句；通常以 70–120 个汉字为编辑目标，不把长度当作硬性通过条件
+   - 核心实体与事件变化放在首句前部，同时说明读者能获得的具体信息
+   - 不堆同义关键词，不为了凑长度罗列功能；搜索引擎可能按查询改用正文片段
 
 ### 写入 frontmatter
 
-更新草稿文件的 frontmatter：`title`、`date`、`cover`（如有）保留不动，只新增/替换 `permalink`、`categories`、`tags`、`description`。
+更新草稿文件的 frontmatter：`title`、`date`、`cover`（如有）保留不动；新增/替换 `permalink`、`categories`、`tags`、`description`、`sources`。新草稿不要主动添加 `updated`；只有文章发布后发生实质内容更新时才设置真实更新时间。
 
 完整 frontmatter 示例见 `examples/article-template.md`。
 
 ---
 
-## Stage 5 — Hand off to user (do NOT publish)
+## Stage 5 — Validate generated SEO output
+
+按 `examples/seo-workflow.md` 完成验证，不能只检查 Markdown：
+
+1. 运行 `node --test test/*.test.mjs`（项目存在这些测试时）。
+2. 运行 `npx hexo generate --draft`，因为普通生产构建不包含草稿。
+3. 运行 `git diff --check`。
+4. 打开 `public/<permalink>/index.html`，确认 title、meta description、canonical、OG 标记、唯一 H1、封面 alt、`NewsArticle` JSON-LD、发布日期、修改日期与 citation 均和草稿一致；JSON-LD 必须可解析。
+5. 检查正文内链目标存在，链接文字能说明目标内容；不插入无关链接或连续堆叠链接。
+
+不要为单篇新闻默认添加 `meta keywords`、FAQ 段或 `FAQPage` Schema。站点级 Schema 由主题模板维护；结构化数据必须与页面可见内容一致。
+
+---
+
+## Stage 6 — Hand off to user (do NOT publish)
 
 **停在这里。** 不要跑 `hexo publish`。用户会自己审核后发布。即使用户原话说"发布到博客"/"publish to my blog"，本 skill 也只产出可发布草稿；真正发布必须作为用户审核后的新请求处理。
 
 确认草稿就位：
 - 文件在 `source/_drafts/<slug>.md`（仍在 `_drafts/`，不是 `_posts/`）
-- frontmatter 含 `permalink`、`categories`、`tags`、`description` 四项
+- frontmatter 含 `permalink`、`categories`、`tags`、`description`、`sources`
 - 正文干净（只含已确认内容，无信息空缺句、重复标题或 Sources 段）
+- `npx hexo generate --draft` 通过，生成页面的 SEO 元数据与 JSON-LD 已核对
 
 然后向用户汇报：
 - 草稿路径

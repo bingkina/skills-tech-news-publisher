@@ -20,16 +20,18 @@
 ## 工作流程
 
 ```
-研究 → 撰写 → 创建草稿 → SEO 优化 → 交付
+SEO 选题简报 → 研究 → 撰写 → 创建草稿 → SEO 优化 → 生成验证 → 交付
 ```
 
 | 阶段 | 做什么 |
 |------|--------|
+| **Stage 0 SEO 简报** | 扫描已发布文章和草稿，确认搜索意图、重复角度、相关文章、专题页、候选标题与 slug |
 | **Stage 1 研究** | 跨 5 个层次搜集信息，三角验证核心数据，每条信息归入 A/B/C 三档 |
-| **Stage 2 撰写** | 正文使用 `article-writing` skill 基于已确认信息生成大众可读文章，用内置 Image 2 生成 5:2 封面；涉及已确认数据图表时优先插入清晰原图截图，不清晰再用 Image 2 重制 |
-| **Stage 3 建草稿** | `hexo new draft "<title>"`，写入正文（去掉重复标题与来源段） |
-| **Stage 4 SEO** | 切换 SEO 优化师角色，grep 现有 taxonomy，配置 permalink / categories / tags / description |
-| **Stage 5 交付** | 草稿路径 + 信源列表交还用户，正文不展示信源，**不执行 `hexo publish`** |
+| **Stage 2 撰写** | 正文使用 `article-writing` skill 基于已确认信息生成大众可读文章，加入必要的上下文内链，用内置 Image 2 生成 5:2 封面；涉及已确认数据图表时优先插入清晰原图截图，不清晰再用 Image 2 重制 |
+| **Stage 3 建草稿** | `hexo new draft "<title>"`，写入正文和结构化 `sources`（去掉重复标题与正文来源段） |
+| **Stage 4 SEO** | 切换 SEO 优化师角色，grep 现有 taxonomy，配置 permalink / categories / tags / description / sources |
+| **Stage 5 验证** | 生成包含草稿的站点，核对 HTML 中的 SEO 元数据、内链与 `NewsArticle` JSON-LD |
+| **Stage 6 交付** | 草稿路径 + 信源列表交还用户，正文不展示信源，**不执行 `hexo publish`** |
 
 ## 触发条件
 
@@ -148,18 +150,19 @@ git clone https://github.com/bingkina/skills-tech-news-publisher.git
 
 ## 文件清单
 
-- [`SKILL.md`](./SKILL.md) — 完整 Skill 定义（含 frontmatter、5 阶段流程、反 AI 腔调规则、SEO 优化规则）
+- [`SKILL.md`](./SKILL.md) — 完整 Skill 定义（含 frontmatter、7 阶段流程、反 AI 腔调规则、SEO 优化规则）
 - `README.md` — 本文件
 - `examples/` — 示例与模板（不影响主缓存）：
   - `article-template.md` — Markdown 文章模板 + Hexo frontmatter 示例 + permalink 命名规则
   - `image-workflow.md` — Image 2 提示词、生成、确认、上传、插入的完整流程
+  - `seo-workflow.md` — SEO Brief、重复角度检查、内链、元数据和生成结果验证
   - `tone-samples.md` — ❌/✅ 语感对照样本
 
 ## 设计决策
 
 **为什么停在草稿阶段？**
 
-技术上让 AI 代理直接 `hexo publish` 完全可行。但发布是一个不可逆动作，且科技新闻的事实核查必须留一个人类闭环。Skill 在 Stage 5 明确写了：即使用户原始指令包含「发布到博客」，也理解为「产出一篇可直接发布的草稿」，而不是发布授权。
+技术上让 AI 代理直接 `hexo publish` 完全可行。但发布是一个不可逆动作，且科技新闻的事实核查必须留一个人类闭环。Skill 在 Stage 6 明确写了：即使用户原始指令包含「发布到博客」，也理解为「产出一篇可直接发布的草稿」，而不是发布授权。
 
 **为什么强制扫描已有 tag？**
 
