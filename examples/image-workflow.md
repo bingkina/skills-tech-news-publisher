@@ -1,6 +1,6 @@
 # Image Workflow
 
-Each article needs one generated 5:2 cover immediately after the blockquote summary, with no blank line between the blockquote and the image. Generate it from the finalized article with built-in `image_gen` (Image 2). If the body discusses an A-grade data chart, also add that chart near the paragraph it supports by following **Handle Data Charts** below. Generation and chart capture are automatic; every upload still requires explicit user confirmation. Every Markdown image alt/name must be specific to the article topic and useful for SEO; do not use generic `配图`. The 5:2 ratio applies only to the cover, not to inline data charts.
+Each article needs one generated 2.35:1 cover immediately after the blockquote summary, with no blank line between the blockquote and the image. Generate it from the finalized article with built-in `image_gen` (Image 2). If the body discusses an A-grade data chart, also add that chart near the paragraph it supports by following **Handle Data Charts** below. Generation and chart capture are automatic; every upload still requires explicit user confirmation. Every Markdown image alt/name must be specific to the article topic and useful for SEO; do not use generic `配图`. The 2.35:1 ratio applies only to the cover, not to inline data charts.
 
 The live rules in `SKILL.md` and this file override old conversation memory, old workflow summaries, and generic `imagegen` examples. Never copy a generic `no text` or `no logos` constraint into an article-cover prompt unless the user explicitly requests it or the finalized article provides no accurate text or confirmed brand mark to use.
 
@@ -34,7 +34,7 @@ Asset type: Chinese technology news article cover
 Primary request: create a visual cover for “<article title>” based on <confirmed subject and user-facing change>
 Subject: <concrete objects or scene supported by the article>
 Style/medium: clean editorial technology illustration, polished and approachable
-Composition/framing: exact 5:2 wide landscape canvas, clear focal point, readable at thumbnail size
+Composition/framing: exact 2.35:1 wide landscape canvas, clear focal point, readable at thumbnail size
 Lighting/mood: bright, clear, confident, not dramatic
 Color palette: modern restrained technology colors with good contrast
 Title text (verbatim): "<finalized article title>" if title text is used; otherwise state the editorial reason for omitting it
@@ -51,7 +51,7 @@ Use built-in `image_gen` (Image 2) by default for the cover. Do not search for o
 
 A verified official Logo asset used only as a targeted edit reference is not a cover substitute. When a confirmed brand Logo needs correction, obtain the reference from the brand's official website or official brand resources; do not use an unverified third-party redraw.
 
-Generate exactly one cover before the first user preview. Inspect it for subject relevance, factual consistency, composition, the accuracy of any included title text, additional readable copy, or logos, fake interfaces, unsupported details, and an exact 5:2 canvas ratio. Verify the actual pixel dimensions before preview or upload (for example, 2000×800). If the ratio is wrong, crop or extend the canvas locally only when the title, Logo, and focal subject remain intact. Never stretch or squeeze the image to force the ratio.
+Generate exactly one cover before the first user preview. Inspect it for subject relevance, factual consistency, composition, the accuracy of any included title text, additional readable copy, or logos, fake interfaces, unsupported details, and an exact 2.35:1 canvas ratio. Verify the actual pixel dimensions before preview or upload (for example, 1880×800). If the ratio is wrong, crop or extend the canvas locally only when the title, Logo, and focal subject remain intact. Never stretch or squeeze the image to force the ratio.
 
 If the first result fails any check, save and show that first result, identify the specific issue, and wait for explicit user approval before making any correction, edit, or regeneration. Do not issue a second `image_gen` call automatically, including for a wrong ratio, misspelled title, inaccurate copy, distorted Logo, weak composition, or generic `imagegen` guidance to iterate after validation. A second image-generation call is allowed only after the user clearly requests a revision or regeneration.
 
@@ -120,7 +120,7 @@ Acceptable approvals include clear replies such as:
 
 If the user does not approve, do not upload.
 
-If the user explicitly requests a revision, make the requested single change with `image_gen`, preserve the exact 5:2 cover ratio, save a new versioned file such as `<article-slug>-cover-v2.png`, show it, and ask for upload confirmation again. A diagnostic finding alone is not permission to make this second call.
+If the user explicitly requests a revision, make the requested single change with `image_gen`, preserve the exact 2.35:1 cover ratio, save a new versioned file such as `<article-slug>-cover-v2.png`, show it, and ask for upload confirmation again. A diagnostic finding alone is not permission to make this second call.
 
 ## Upload
 
